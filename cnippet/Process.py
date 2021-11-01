@@ -24,10 +24,10 @@ def execute(parent, cmd, *args, **kwargs):
 
     with xtrace(parent, flatten(cmd)) as h:
         try:
-            code = subprocess.call(cmd, *args, **kwargs)
+            code = subprocess.call(cmd, *args, **kwargs, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         except:
-            sys.exit(
-                DiagnosticReporter.fatal(EXCEPTION_EXECUTING_PROCESS, cmd[0]))
+            pass #sys.exit(
+            #    DiagnosticReporter.fatal(EXCEPTION_EXECUTING_PROCESS, cmd[0]))
         finally:
             h.report(code)
     return code
