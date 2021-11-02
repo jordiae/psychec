@@ -21,7 +21,7 @@ def execute(parent, cmd, *args, **kwargs):
     """
     Execute an external process with the given command.
     """
-
+    code = -1
     with xtrace(parent, flatten(cmd)) as h:
         try:
             code = subprocess.call(cmd, *args, **kwargs, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
