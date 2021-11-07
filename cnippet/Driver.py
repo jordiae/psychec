@@ -119,6 +119,7 @@ class Driver:
         cmd = [self.cnip_opts['cc']] + new_cmd
         code = execute(Driver.ID(), cmd)
         if code != 0:
-            sys.exit(DiagnosticReporter.fatal(HOST_C_COMPILER_FORWARDING_FAILED))
+            # sys.exit(DiagnosticReporter.fatal(HOST_C_COMPILER_FORWARDING_FAILED))
+            return -1
 
         return 0
