@@ -111,13 +111,13 @@ class Driver:
             unit = make_unit(c_file, gen_dir)
             self._compile_unit(unit, cc_cmd)
 
-            debug(Driver.ID(),
-                  f'replace {unit.c_file} for {unit.cnip_file} in command')
-            new_cmd = [w.replace(unit.c_file, unit.cnip_file)
-                       for w in new_cmd]
+            # debug(Driver.ID(),
+            #      f'replace {unit.c_file} for {unit.cnip_file} in command')
+            #new_cmd = [w.replace(unit.c_file, unit.cnip_file)
+            #           for w in new_cmd]
 
-        cmd = [self.cnip_opts['cc']] + new_cmd
-        code = execute(Driver.ID(), cmd)
+        # cmd = [self.cnip_opts['cc']] + new_cmd
+        # code = execute(Driver.ID(), cmd)
         if code != 0:
             # sys.exit(DiagnosticReporter.fatal(HOST_C_COMPILER_FORWARDING_FAILED))
             return -1
