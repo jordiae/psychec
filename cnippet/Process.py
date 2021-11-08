@@ -23,6 +23,7 @@ def execute(parent, cmd, *args, **kwargs):
     """
     code = -1
     kwargs['timeout'] = TIMEOUT_PSYCHEC
+    print(' '.join(cmd))
     # with xtrace(parent, flatten(cmd)) as h:
     with nullcontext:
         try:
