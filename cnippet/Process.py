@@ -15,21 +15,20 @@ import sys
 from Algorithms import flatten
 from Diagnostics import DiagnosticReporter, EXCEPTION_EXECUTING_PROCESS
 from Logger import xtrace
-from contextlib import nullcontext
+
 TIMEOUT_PSYCHEC = 20
+
 def execute(parent, cmd, *args, **kwargs):
     """
     Execute an external process with the given command.
     """
     code = -1
     kwargs['timeout'] = TIMEOUT_PSYCHEC
-    print(' '.join(cmd))
     # with xtrace(parent, flatten(cmd)) as h:
-    with nullcontext:
+    if True:
         try:
             code = subprocess.call(cmd, *args, **kwargs, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-        except BaseException as e:
-            print(e)
+        except:
             pass #sys.exit(
             #    DiagnosticReporter.fatal(EXCEPTION_EXECUTING_PROCESS, cmd[0]))
         #finally:
