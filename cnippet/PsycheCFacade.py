@@ -69,11 +69,12 @@ class PsycheCFacade:
             cmd.append(os.path.join(dir_path, 'libpsychecstd'))
 
         code = execute(PsycheCFacade.ID(), cmd)
-        if code != 0:
-            sys.exit(
-                DiagnosticReporter.fatal(CONSTRAINT_GENERATION_FOR_FILE_FAILED,
-                                         unit.c_file,
-                                         error=code))
+        return code
+        #if code != 0:
+        #    sys.exit(
+        #        DiagnosticReporter.fatal(CONSTRAINT_GENERATION_FOR_FILE_FAILED,
+        #                                 unit.c_file,
+        #                                 error=code))
 
     def solve_constraints(self, unit: Unit):
         """
@@ -91,7 +92,8 @@ class PsycheCFacade:
             cmd.append('--match-stdlib=approx')
 
         ok = execute(PsycheCFacade.ID(), cmd)
-        if ok != 0:
-            sys.exit(
-                DiagnosticReporter.fatal(CONSTRAINT_SOLVING_FOR_FILE_FAILED,
-                                         unit.c_file))
+        return ok
+        #if ok != 0:
+        #    sys.exit(
+        #        DiagnosticReporter.fatal(CONSTRAINT_SOLVING_FOR_FILE_FAILED,
+        #                                 unit.c_file))
