@@ -42,7 +42,7 @@ class PsycheCFacade:
 
     def generate_constraints(self,
                              unit: Unit,
-                             cc_cmd_summary):
+                             cc_cmd_summary, timeout=None):
         """
         Generate constraints for a unit.
         """
@@ -68,7 +68,7 @@ class PsycheCFacade:
             dir_path = pathlib.Path(__file__).parent.parent.absolute()
             cmd.append(os.path.join(dir_path, 'libpsychecstd'))
 
-        code = execute(PsycheCFacade.ID(), cmd)
+        code = execute(PsycheCFacade.ID(), cmd, timeout_psychec=timeout)
         return code
         #if code != 0:
         #    sys.exit(
@@ -76,7 +76,7 @@ class PsycheCFacade:
         #                                 unit.c_file,
         #                                 error=code))
 
-    def solve_constraints(self, unit: Unit):
+    def solve_constraints(self, unit: Unit, timeout=None):
         """
         Solve the constraint.
         """
@@ -91,7 +91,7 @@ class PsycheCFacade:
         if not self.no_stdlib:
             cmd.append('--match-stdlib=approx')
 
-        ok = execute(PsycheCFacade.ID(), cmd)
+        ok = execute(PsycheCFacade.ID(), cmd, timeout_psychec=timeout)
         return ok
         #if ok != 0:
         #    sys.exit(
