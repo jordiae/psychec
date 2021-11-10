@@ -50,20 +50,20 @@ class Driver:
                      unit.poly_file,
                      unit.cnip_file)
 
-    def _compile_unit(self, unit, cc_cmd):
+    def _compile_unit(self, unit, cc_cmd, timeout=None):
         """
         Perform the entire type-inference workflow for a unit.
         """
 
         Driver._delete_old_files(unit)
 
-        self.psyche.generate_constraints(unit, cc_cmd)
+        self.psyche.generate_constraints(unit, cc_cmd, timeout=timeout)
 
         if not os.path.isfile(unit.cstr_file):
             copy_file(unit.c_file, unit.cnip_file)
             return
 
-        self.psyche.solve_constraints(unit)
+        self.psyche.solve_constraints(unit, timeout=timeout)
 
         if os.path.isfile(unit.poly_file):
             concat_file(unit.poly_file, unit.cnip_file)
@@ -74,7 +74,7 @@ class Driver:
             concat_file(unit.cnip_file, unit.inc_file)
             copy_file(unit.inc_file, unit.cnip_file)
 
-    def execute(self):
+    def execute(self, timeout=None):
         """
         Entry point.
         """
@@ -109,7 +109,7 @@ class Driver:
                 continue
 
             unit = make_unit(c_file, gen_dir)
-            self._compile_unit(unit, cc_cmd)
+            self._compile_unit(unit, cc_cmd, timeout=timeout)
 
             # debug(Driver.ID(),
             #      f'replace {unit.c_file} for {unit.cnip_file} in command')
