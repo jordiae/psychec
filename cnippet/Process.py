@@ -16,14 +16,16 @@ from Algorithms import flatten
 from Diagnostics import DiagnosticReporter, EXCEPTION_EXECUTING_PROCESS
 from Logger import xtrace
 
-TIMEOUT_PSYCHEC = 20
 
 def execute(parent, cmd, *args, **kwargs):
     """
     Execute an external process with the given command.
     """
     code = -1
-    kwargs['timeout'] = TIMEOUT_PSYCHEC
+    if 'timeout_psychec' in kwargs:
+        kwargs['timeout'] = kwargs['timeout_psychec']
+        if kwargs['timeout_psychec'] is None:
+            del kwargs['timeout']
     # with xtrace(parent, flatten(cmd)) as h:
     if True:
         try:
