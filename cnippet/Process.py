@@ -35,8 +35,7 @@ def execute(parent, cmd, *args, **kwargs):
     if True:
         try:
             code = subprocess.call(cmd, *args, **kwargs, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-        except BaseException as e:
-            print(e)
+        except:
             pass #sys.exit(
             #    DiagnosticReporter.fatal(EXCEPTION_EXECUTING_PROCESS, cmd[0]))
         #finally:
