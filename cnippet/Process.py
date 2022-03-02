@@ -26,11 +26,17 @@ def execute(parent, cmd, *args, **kwargs):
         kwargs['timeout'] = kwargs['timeout_psychec']
         if kwargs['timeout_psychec'] is None:
             del kwargs['timeout']
+        del kwargs['timeout_psychec']
+    if 'stdout' in kwargs:
+        del kwargs['stdout']
+    if 'stderr' in kwargs:
+        del kwargs['stderr']
     # with xtrace(parent, flatten(cmd)) as h:
     if True:
         try:
             code = subprocess.call(cmd, *args, **kwargs, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-        except:
+        except BaseException as e:
+            print(e)
             pass #sys.exit(
             #    DiagnosticReporter.fatal(EXCEPTION_EXECUTING_PROCESS, cmd[0]))
         #finally:
